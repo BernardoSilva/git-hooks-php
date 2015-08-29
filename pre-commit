@@ -1,0 +1,54 @@
+#!/bin/bash
+# Pre-commit Git hook.
+# Runs PHP CS on PHP files.
+#
+# If you absolutely must commit without testing,
+# use: git commit --no-verify
+
+# This will check only staged files to be commited.
+filenames=($(git diff --staged --name-only HEAD))
+
+# This will set text to red in terminal.
+text_red=`tput setaf 1`
+# This will set the text to green in terminal.
+text_green=`tput setaf 2`
+# This will reset the terminal text to normal.
+text_reset=`tput sgr0`
+
+numberFilesChanged="${#filenames[@]}"
+errorsFound=0
+
+
+if [[ $numberFilesChanged > 0 ]];
+then
+    echo "$numberFilesChanged files were changed, running php-cs-fixer"
+    # Run throw changed files.
+    for i in "${filenames[@]}"
+    do
+        if [[ $i == *.php ]];
+        then
+            # Run PHP Code Beautifier and Fixer first.
+            ./bin/phpcbf --standard=PSR2 -p $i --diff
+            # Run PHP Code Style Check and detect in the fixer was not able to fix code.
+            ./bin/phpcs --standard=PSR2 -p $i
+
+            checkResult=$?
+      	    if [ ${checkResult} -eq 0 ];
+            then
+                # File had some issues. Now it is fine. Add this file to git again.
+                git add $i
+            else
+                ((errorsFound++))
+            fi
+        fi
+    done
+fi
+
+if [[ ${errorsFound} == 0 ]]
+then
+    echo "${text_green}PHP Code Beautifier and Fixer finished execution successfully.${text_reset}"
+    exit 0;
+else
+    echo "${text_red}Errors or warnings were found please fix them and commit again.${text_reset}"
+    exit 1;
+fi

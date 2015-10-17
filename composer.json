@@ -13,6 +13,10 @@
         "source": "https://github.com/BernardoSilva/git-hooks-php"
     },
     "require": {
-        "bernardosilva/git-hooks-installer-plugin": "^0.0.2"
+        "bernardosilva/git-hooks-installer-plugin": "^0.0.2",
+        "squizlabs/php_codesniffer": "^2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
     }
 }

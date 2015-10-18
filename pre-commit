@@ -28,9 +28,9 @@ then
         if [[ $i == *.php ]];
         then
             # Run PHP Code Beautifier and Fixer first.
-            ./bin/phpcbf --standard=PSR2 -p $i --diff
+            ./vendor/squizlabs/php_codesniffer/scripts/phpcbf --standard=PSR2 -p $i --diff
             # Run PHP Code Style Check and detect in the fixer was not able to fix code.
-            ./bin/phpcs --standard=PSR2 -p $i
+            ./vendor/squizlabs/php_codesniffer/scripts/phpcs --standard=PSR2 -p $i
 
             checkResult=$?
       	    if [ ${checkResult} -eq 0 ];

@@ -1,7 +1,7 @@
 {
     "name": "bernardosilva/git-hooks-php",
     "type": "git-hook",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "Composer git-hook package with hooks for your php projects.",
     "keywords": ["git", "hooks", "checkstyle", "php-cs-fixer", "pre-commit"],
     "license": "GPL3",

@@ -17,10 +17,8 @@ php composer.phar require bernardosilva/git-hooks-php
 
 ## pre-commit
 
-Currently my pre-commit hook is checking for PSR2 coding standards that are not met.
-Use this package to detect that:
-
-* [squizlabs/php_codesniffer](https://github.com/squizlabs/php_codesniffer)
+Currently my pre-commit hook is checking for `PSR2` coding standards
+that are not met using [php_codesniffer tool](https://github.com/squizlabs/php_codesniffer).
 
 
 ## How to contribute

@@ -25,7 +25,7 @@ then
     # Run throw changed files.
     for i in "${filenames[@]}"
     do
-        if [[ $i == *.php ]];
+        if [[ $i == *.php ]] && [ -f $i ];
         then
             # Run PHP Code Beautifier and Fixer first.
             ./vendor/squizlabs/php_codesniffer/scripts/phpcbf --standard=PSR2 -p $i --diff

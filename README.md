@@ -15,16 +15,6 @@ Just add this package as a dependency on your project.
 php composer.phar require bernardosilva/git-hooks-php
 ```
 
-On my projects I always use a `/bin` directory and this `pre-commit` script require those path's to work.
-
-You can set your bin directory on your `composer.json` file
-
-```json
-"config": {
-    "bin-dir": "bin"
-}
-```
-
 ## pre-commit
 
 Currently my pre-commit hook is checking for PSR2 coding standards that are not met.

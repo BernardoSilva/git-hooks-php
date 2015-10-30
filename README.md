@@ -1,5 +1,8 @@
 # git-hooks-php
 
+
+[![License](https://img.shields.io/packagist/l/bernardosilva/git-hooks-php.svg)](https://packagist.org/packages/bernardosilva/git-hooks-php)
+
 This is a [`git-hook` package](https://github.com/BernardoSilva/git-hooks-installer-plugin#git-hook-package) that contains some standards I want to use on all my PHP projects.
 
 I use the git `pre-commit` hook to validate all my code before every commit to ensure

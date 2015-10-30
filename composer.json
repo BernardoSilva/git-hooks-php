@@ -3,7 +3,7 @@
     "type": "git-hook",
     "description": "Composer git-hook package with hooks for your php projects.",
     "keywords": ["git", "hooks", "checkstyle", "php-cs-fixer", "pre-commit"],
-    "license": "GPL3",
+    "license": "MIT",
     "authors": [
         {"name": "Bernardo Silva", "email": "benny.stuff@gmail.com"}
     ],

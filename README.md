@@ -17,7 +17,7 @@ that my code is always valid.
 Just add this package as a dependency on your project.
 
 ```sh
-php composer.phar require bernardosilva/git-hooks-php
+php composer.phar require --dev bernardosilva/git-hooks-php
 ```
 
 ## pre-commit

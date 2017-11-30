@@ -28,3 +28,11 @@ that are not met using [php_codesniffer tool](https://github.com/squizlabs/php_c
 
 * Create a Pull Request
 * Suggest new ideas or open new detected issues
+
+## Created by
+
+* [Bernardo Silva](https://www.bernardosilva.com)
+
+## License
+
+MIT © Bernardo Silva](https://www.bernardosilva.com)

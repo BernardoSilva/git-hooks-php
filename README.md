@@ -35,4 +35,4 @@ that are not met using [php_codesniffer tool](https://github.com/squizlabs/php_c
 
 ## License
 
-MIT © Bernardo Silva](https://www.bernardosilva.com)
+MIT © [Bernardo Silva](https://www.bernardosilva.com)

@@ -1,6 +1,8 @@
 # git-hooks-php
 
-
+[![Latest Stable Version](https://poser.pugx.org/bernardosilva/git-hooks-php/v/stable)](https://packagist.org/packages/bernardosilva/git-hooks-php)
+[![Monthly Downloads](https://poser.pugx.org/bernardosilva/git-hooks-php/d/monthly)](https://packagist.org/packages/bernardosilva/git-hooks-php)
+[![Total Downloads](https://poser.pugx.org/bernardosilva/git-hooks-php/downloads)](https://packagist.org/packages/bernardosilva/git-hooks-php) 
 [![License](https://img.shields.io/packagist/l/bernardosilva/git-hooks-php.svg)](https://packagist.org/packages/bernardosilva/git-hooks-php)
 
 This is a [`git-hook` package](https://github.com/BernardoSilva/git-hooks-installer-plugin#git-hook-package) that contains some standards I want to use on all my PHP projects.

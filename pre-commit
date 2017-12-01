@@ -18,6 +18,16 @@ text_reset=`tput sgr0`
 numberFilesChanged="${#filenames[@]}"
 errorsFound=0
 
+# known php_codesniffer files where it looks for configuration in project root
+phpcs_file=./phpcs.xml
+phpcs_dist_file=./phpcs.xml.dist
+
+# Use PSR2 standard as default only when no phpcs file is present in project root
+if [[ ! -e "$phpcs_file" && ! -e "$phpcs_dist_file" ]]; then
+    default_standard=--standard=PSR2
+else
+    default_standard=""
+fi
 
 if [[ $numberFilesChanged > 0 ]];
 then
@@ -28,9 +38,9 @@ then
         if [[ $i == *.php ]] && [ -f $i ];
         then
             # Run PHP Code Beautifier and Fixer first.
-            ./vendor/squizlabs/php_codesniffer/bin/phpcbf --standard=PSR2 -p $i
+            ./vendor/squizlabs/php_codesniffer/bin/phpcbf $default_standard -p $i
             # Run PHP Code Style Check and detect in the fixer was not able to fix code.
-            ./vendor/squizlabs/php_codesniffer/bin/phpcs --standard=PSR2 -p $i
+            ./vendor/squizlabs/php_codesniffer/bin/phpcs $default_standard -p $i
 
             checkResult=$?
       	    if [ ${checkResult} -eq 0 ];

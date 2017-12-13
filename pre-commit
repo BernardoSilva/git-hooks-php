@@ -40,10 +40,10 @@ then
         if [[ $i == *.php ]] && [ -f $i ];
         then
             # Run PHP Code Beautifier and Fixer first.
-            "$($phpcbf_bin $default_standard -p $i)"
+            output="$($phpcbf_bin $default_standard $i)"
 
             # Run PHP Code Style Check and detect in the fixer was not able to fix code.
-            "$($phpcs_bin $default_standard -p $i)"
+            codestyle_errors="$($phpcs_bin $default_standard $i)"
 
             checkResult=$?
       	    if [ ${checkResult} -eq 0 ];
@@ -51,6 +51,7 @@ then
                 # File had some issues. Now it is fine. Add this file to git again.
                 git add $i
             else
+                echo "$codestyle_errors"
                 ((errorsFound++))
             fi
         fi

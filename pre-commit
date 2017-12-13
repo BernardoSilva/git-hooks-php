@@ -21,6 +21,8 @@ errorsFound=0
 # known php_codesniffer files where it looks for configuration in project root
 phpcs_file=./phpcs.xml
 phpcs_dist_file=./phpcs.xml.dist
+phpcbf_bin="$(find **/vendor/squizlabs/php_codesniffer/bin/phpcbf)"
+phpcs_bin="$(find **/vendor/squizlabs/php_codesniffer/bin/phpcs)"
 
 # Use PSR2 standard as default only when no phpcs file is present in project root
 if [[ ! -e "$phpcs_file" && ! -e "$phpcs_dist_file" ]]; then
@@ -38,9 +40,10 @@ then
         if [[ $i == *.php ]] && [ -f $i ];
         then
             # Run PHP Code Beautifier and Fixer first.
-            ./vendor/squizlabs/php_codesniffer/bin/phpcbf $default_standard -p $i
+            "$($phpcbf_bin $default_standard -p $i)"
+
             # Run PHP Code Style Check and detect in the fixer was not able to fix code.
-            ./vendor/squizlabs/php_codesniffer/bin/phpcs $default_standard -p $i
+            "$($phpcs_bin $default_standard -p $i)"
 
             checkResult=$?
       	    if [ ${checkResult} -eq 0 ];

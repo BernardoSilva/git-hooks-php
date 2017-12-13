@@ -21,8 +21,8 @@ errorsFound=0
 # known php_codesniffer files where it looks for configuration in project root
 phpcs_file=./phpcs.xml
 phpcs_dist_file=./phpcs.xml.dist
-phpcbf_bin="$(find **/vendor/squizlabs/php_codesniffer/bin/phpcbf)"
-phpcs_bin="$(find **/vendor/squizlabs/php_codesniffer/bin/phpcs)"
+phpcbf_bin=$(find . -path "*/vendor/squizlabs/php_codesniffer/bin/phpcbf")
+phpcs_bin=$(find . -path "*/vendor/squizlabs/php_codesniffer/bin/phpcs")
 
 # Use PSR2 standard as default only when no phpcs file is present in project root
 if [[ ! -e "$phpcs_file" && ! -e "$phpcs_dist_file" ]]; then

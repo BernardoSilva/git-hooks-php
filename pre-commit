@@ -17,8 +17,8 @@ text_yellow=`tput setaf 3`
 # This will reset the terminal text to normal.
 text_reset=`tput sgr0`
 
-numberFilesChanged="${#filenames[@]}"
-errorsFound=0
+number_files_changed="${#filenames[@]}"
+errors_found=0
 files_fixed=0
 
 # known php_codesniffer files where it looks for configuration in project root
@@ -34,9 +34,9 @@ else
     default_standard=""
 fi
 
-if [[ $numberFilesChanged > 0 ]];
+if [[ $number_files_changed > 0 ]];
 then
-    echo "$numberFilesChanged files were changed, running php-cs-fixer"
+    echo "$number_files_changed files were changed, running php-cs-fixer"
     # Run throw changed files.
     for i in "${filenames[@]}"
     do
@@ -66,13 +66,13 @@ then
                 ((files_fixed++))
             else
                 echo "$codestyle_errors"
-                ((errorsFound++))
+                ((errors_found++))
             fi
         fi
     done
 fi
 
-if [[ ${errorsFound} == 0 ]]
+if [[ ${errors_found} == 0 ]]
 then
     if [[ ${files_fixed} > 0 ]]
     then

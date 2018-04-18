@@ -1,6 +1,6 @@
 #!/bin/bash
 # Pre-commit Git hook.
-# Runs PHP CS on PHP files.
+# Runs PHP Codestyle checker and fixer whenever errors are found on PHP files.
 #
 # If you absolutely must commit without testing,
 # use: git commit --no-verify
@@ -12,11 +12,14 @@ filenames=($(git diff --staged --name-only HEAD))
 text_red=`tput setaf 1`
 # This will set the text to green in terminal.
 text_green=`tput setaf 2`
+# This will set the text to yellow in terminal.
+text_yellow=`tput setaf 3`
 # This will reset the terminal text to normal.
 text_reset=`tput sgr0`
 
 numberFilesChanged="${#filenames[@]}"
 errorsFound=0
+files_fixed=0
 
 # known php_codesniffer files where it looks for configuration in project root
 phpcs_file=./phpcs.xml
@@ -39,17 +42,28 @@ then
     do
         if [[ $i == *.php ]] && [ -f $i ];
         then
+            # Run PHP Code Style Check and detect in the fixer was not able to fix code.
+            codestyle_errors_before_autofix="$($phpcs_bin $default_standard $i)"
+            check_result_before=$?
+
+            if [ ${check_result_before} -eq 0 ];
+            then
+                # No errors to fix, skip to next file.
+                continue
+            fi
+
             # Run PHP Code Beautifier and Fixer first.
             output="$($phpcbf_bin $default_standard $i)"
 
             # Run PHP Code Style Check and detect in the fixer was not able to fix code.
             codestyle_errors="$($phpcs_bin $default_standard $i)"
+            check_result_after_autofix=$?
 
-            checkResult=$?
-      	    if [ ${checkResult} -eq 0 ];
+            if [ ${check_result_after_autofix} -eq 0 ];
             then
-                # File had some issues. Now it is fine. Add this file to git again.
-                git add $i
+                # File had some issues but they were automatically fixed.
+                echo "${text_green}Codestyle errors were fixed automatically! add those changes and commit again.${text_reset}"
+                ((files_fixed++))
             else
                 echo "$codestyle_errors"
                 ((errorsFound++))
@@ -60,9 +74,14 @@ fi
 
 if [[ ${errorsFound} == 0 ]]
 then
+    if [[ ${files_fixed} > 0 ]]
+    then
+        echo "${text_yellow}PHP Code Beautifier and Fixer fixed your files for you, add those changes and commit again.${text_reset}"
+        exit 1;
+    fi
     echo "${text_green}PHP Code Beautifier and Fixer finished execution successfully.${text_reset}"
     exit 0;
 else
-    echo "${text_red}Errors or warnings were found please fix them and commit again.${text_reset}"
+    echo "${text_red}Errors or warnings were found and could not be fixed! Try to fix them and commit again.${text_reset}"
     exit 1;
 fi

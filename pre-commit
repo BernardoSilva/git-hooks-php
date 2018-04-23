@@ -76,12 +76,12 @@ if [[ ${errors_found} == 0 ]]
 then
     if [[ ${files_fixed} > 0 ]]
     then
-        echo "${text_yellow}PHP Code Beautifier and Fixer fixed your files for you, add those changes and commit again.${text_reset}"
+        echo "${text_yellow}PHP Codestyle checked and fixed your files for you, add those changes and commit again.${text_reset}"
         exit 1;
     fi
-    echo "${text_green}PHP Code Beautifier and Fixer finished execution successfully.${text_reset}"
+    echo "${text_green}PHP Codestyle check passed successfully.${text_reset}"
     exit 0;
 else
-    echo "${text_red}Errors or warnings were found and could not be fixed! Try to fix them and commit again.${text_reset}"
+    echo "${text_red}PHP Codestyle found errors or warnings and could not fix them! Try to fix them and commit again.${text_reset}"
     exit 1;
 fi
